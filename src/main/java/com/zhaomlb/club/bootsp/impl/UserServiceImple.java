@@ -16,4 +16,9 @@ public class UserServiceImple implements UserService {
     public List<UserDto> getUserList() {
         return userRespository.findAll();
     }
+    @Override
+    public  UserDto  insert(UserDto userDto)
+    {
+       return userRespository.save(userDto);
+    }
 }
