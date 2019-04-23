@@ -22,12 +22,13 @@ public class RedisServiceImpl implements RedisService {
     @Autowired
     StringRedisTemplate redisTemplate;
 
+
     @Override
     public void save(String key, String value) {
 
         StringBuilder sb = new StringBuilder();
        ;
-        sb.append( this.getClass().toString().replace('.',':')).append(":");
+        sb.append( this.getClass().toString()).append(":");
      /*   sb.append(this.getClass().getSimpleName());
         sb.append('.').append(this.getClass().getName()).append(":");*/
         sb.append(key);
