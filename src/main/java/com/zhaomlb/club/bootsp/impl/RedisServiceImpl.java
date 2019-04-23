@@ -4,7 +4,10 @@ import com.zhaomlb.club.bootsp.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class RedisServiceImpl implements RedisService {
@@ -24,18 +27,49 @@ public class RedisServiceImpl implements RedisService {
 
 
     @Override
-    public void save(String key, String value) {
-
+    public void saveStr(String key, String value) {
         StringBuilder sb = new StringBuilder();
-       ;
-        sb.append( this.getClass().toString()).append(":");
-     /*   sb.append(this.getClass().getSimpleName());
-        sb.append('.').append(this.getClass().getName()).append(":");*/
+        sb.append(this.getClass().toString()).append(":");
         sb.append(key);
         redisTemplate.opsForValue().set(sb.toString(), value);
     }
 
-    public void savelist(String key, String value) {
-        //redisTemplate.opsForList().s(key, value);
+    @Override
+    public long GetIncre(String key) {
+        RedisAtomicLong redisAtomicLong = new RedisAtomicLong(key, redisTemplate.getConnectionFactory());
+        return redisAtomicLong.getAndIncrement();
     }
+
+    @Override
+    public void listPush(String key, String value) {
+        redisTemplate.opsForList().leftPush(key, value);
+    }
+
+    @Override
+    public Object listPop(String key) {
+        return redisTemplate.opsForList().rightPop(key);
+    }
+
+    @Override
+    public void hashSave(String key, String hk, String hv) {
+        redisTemplate.opsForHash().put(key, hk, hv);
+    }
+
+    @Override
+    public void setsave(String key, String... var2) {
+        redisTemplate.opsForSet().add(key, var2);
+    }
+
+    @Override
+    public Set<String> setintersect(String k1, String k2) {
+        Set<String> stringSet = redisTemplate.opsForSet().difference(k1, k2);
+        return stringSet;
+    }
+
+    @Override
+    public void sortset(String key, String sk, double sd) {
+        redisTemplate.opsForZSet().add(key, sk, sd);
+
+    }
+
 }
