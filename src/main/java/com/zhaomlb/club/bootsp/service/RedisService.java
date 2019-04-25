@@ -18,4 +18,10 @@ public interface RedisService {
     Set<String> setintersect(String k1, String k2);
 
     void sortset(String key, String sk,double sd);
+
+    void bitCount(Long useId);
+
+    boolean bitGet(Long useId);
+
+    String bitCountGet(Long useId);
 }

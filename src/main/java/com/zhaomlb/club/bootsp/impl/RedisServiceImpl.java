@@ -4,6 +4,7 @@ import com.zhaomlb.club.bootsp.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Service;
 
@@ -62,7 +63,7 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public Set<String> setintersect(String k1, String k2) {
-        Set<String> stringSet = redisTemplate.opsForSet().difference(k1, k2);
+        Set<String> stringSet = redisTemplate.opsForSet().intersect(k1, k2);
         return stringSet;
     }
 
@@ -72,4 +73,25 @@ public class RedisServiceImpl implements RedisService {
 
     }
 
+    @Override
+    public void bitCount(Long useId) {
+        ValueOperations<String, String> ops = redisTemplate.opsForValue();
+     /*   ops.set("userArry", "0");
+        ops.set("userCount", "0");*/
+        ops.setBit("userArry", useId, true);
+        ops.increment("userCount");
+
+    }
+
+    @Override
+    public boolean bitGet(Long useId) {
+        ValueOperations<String, String> ops = redisTemplate.opsForValue();
+        return ops.getBit("userArry", useId);
+    }
+
+    @Override
+    public String bitCountGet(Long useId) {
+        ValueOperations<String, String> ops = redisTemplate.opsForValue();
+        return ops.get("userCount");
+    }
 }
