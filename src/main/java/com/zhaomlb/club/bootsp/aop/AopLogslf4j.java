@@ -1,9 +1,10 @@
 package com.zhaomlb.club.bootsp.aop;
 
+import javassist.*;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -24,10 +25,32 @@ public class AopLogslf4j {
     public void doBefore(JoinPoint joinPoint) {
 
         StringBuilder str = new StringBuilder();
-        str.append("类:").append(joinPoint.getSignature().getName());
-        str.append("参数:").append(joinPoint.getArgs().toString());
+        str.append("类:").append(joinPoint.getTarget().getClass().getName());
+        str.append("\r\n");
+        str.append("方法名:").append(joinPoint.getSignature().getName());
+        str.append("\r\n");
+        Signature signature = joinPoint.getSignature();
+        MethodSignature methodSignature = (MethodSignature) signature;
+        String[] parameterNames = methodSignature.getParameterNames();
+
+        Object[] args = joinPoint.getArgs();
+        for(int i=0;i<args.length;i++)
+        {
+            str.append("参数类型:").append(args[i].getClass().getName());
+            str.append("参数名称:").append(parameterNames[i]);
+            str.append("参数值:").append(args[i]);
+            str.append("\r\n");
+        }
+
         System.out.print(str.toString());
-        logger.error(str.toString());
+        logger.info(str.toString());
+    }
+
+    @AfterReturning(value = "alllog()", returning="result")
+    public void  doafter(JoinPoint joinPoint,Object result)
+    {
+        System.out.print(result.toString());
+
     }
 
 }
