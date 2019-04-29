@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class AopLogslf4j {
-    private Logger logger = LoggerFactory.getLogger(AopLogslf4j.class);
+    private final Logger logger = LoggerFactory.getLogger(AopLogslf4j.class);
 
     @Pointcut("execution(* com.zhaomlb.club.bootsp.controller..*(..))")
     public void alllog() {
@@ -34,22 +34,22 @@ public class AopLogslf4j {
         String[] parameterNames = methodSignature.getParameterNames();
 
         Object[] args = joinPoint.getArgs();
-        for(int i=0;i<args.length;i++)
-        {
+        for (int i = 0; i < args.length; i++) {
             str.append("参数类型:").append(args[i].getClass().getName());
             str.append("参数名称:").append(parameterNames[i]);
             str.append("参数值:").append(args[i]);
             str.append("\r\n");
         }
 
-        System.out.print(str.toString());
+
         logger.info(str.toString());
     }
 
-    @AfterReturning(value = "alllog()", returning="result")
-    public void  doafter(JoinPoint joinPoint,Object result)
-    {
+    @AfterReturning(value = "alllog()", returning = "result")
+    public void doafter(JoinPoint joinPoint, Object result) {
         System.out.print(result.toString());
+
+        logger.info("info"+result.toString());
 
     }
 
