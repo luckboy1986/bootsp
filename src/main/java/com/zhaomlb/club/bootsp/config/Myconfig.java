@@ -5,8 +5,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource(value = {"classpath:myconfig.properties"},ignoreResourceNotFound = false,
-        encoding = "UTF-8", name = "myconfig.properties")
+@PropertySource(value = {"classpath:${spring.profiles.active}/myconfig.properties"},ignoreResourceNotFound = false,
+        encoding = "UTF-8", name = "${spring.profiles.active}/myconfig.properties")
 @ConfigurationProperties(prefix = "myconfig")
 public class Myconfig {
 
