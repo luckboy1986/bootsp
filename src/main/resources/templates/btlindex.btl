@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${title}"> Title</title>
+    <title>add</title>
+      <script herf="/static/js/bootstrap.js"/>
+        <link rel="stylesheet" herf="/static/css/bootstrap.css"/>
 </head>
 <body>
+
 <div th:object="${userDto}">
     <table>
         <tr>
@@ -17,17 +20,16 @@
             <td th:text="*{sex}">3</td>
         </tr>
         <tr>
-            <a herf="index" th:href="@{/log/savewithParms(name=${userDto.name})}">hhh</a>
+            <a herf="index" th:href="@{/log/savewithParms(name=${userDto.usrNmae})}">hhh</a>
         </tr>
         <tr>
-            <td th:if="${userDto.name!=null}">login</td>
-            <td th:if="${userDto.name==null}">succes</td>
+            <td th:if="${userDto.usrCode!=null}">login</td>
+            <td th:if="${userDto.usrNmae==null}">succes</td>
         </tr>
     </table>
 
 </div>
-<h1 th:text="${desc}">111</h1>
-<b th:text="${desc}"></b>
+
 
 </body>
 </html>

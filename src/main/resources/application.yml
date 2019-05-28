@@ -12,6 +12,9 @@ spring:
     database: 0
     host: 127.0.0.1
     port: 6379
+  mvc:
+    static-path-pattern: /**
+
 jackson:
     dateformat:  yyyy-MM-dd HH:mm:ss
 debug: true

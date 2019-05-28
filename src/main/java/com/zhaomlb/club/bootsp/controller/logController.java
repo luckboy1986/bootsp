@@ -4,8 +4,9 @@ import com.zhaomlb.club.bootsp.entity.LogDto;
 
 import org.springframework.stereotype.Controller;
 
-import org.springframework.web.bind.annotation.RequestHeader;
+
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -16,7 +17,7 @@ public class logController {
 
 
     @RequestMapping("/save")
-   @ResponseBody
+    @ResponseBody
     public LogDto save() {
         LogDto logDto = new LogDto();
         logDto.setClsName(String.valueOf(System.currentTimeMillis()));
@@ -25,12 +26,11 @@ public class logController {
     }
 
     @RequestMapping("/savewithParms")
-    @ResponseBody
-    public LogDto savewithParms(@RequestHeader String name) throws Exception {
+    public LogDto savewithParms(@RequestParam String name) throws Exception {
         LogDto logDto = new LogDto();
         logDto.setClsName(String.valueOf(System.currentTimeMillis()));
         logDto.setMethod(String.valueOf(System.currentTimeMillis()));
-        throw  new Exception("我的错误");
-
+        //throw  new Exception("我的错误");
+        return logDto;
     }
 }
