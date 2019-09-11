@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add</title>
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.css"/>
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/css/bootstrap-theme.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="form row">
+        <div class="form-horizontal col-md-offset-3" id="login_form"><h3 class="form-title">LOGIN</h3>
+            <div class="col-md-9">
+                <div class="form-group"><i class="fa fa-user fa-lg"></i> <input class="form-control required"
+                                                                                type="text" placeholder="Username"
+                                                                                id="username" name="username"
+                                                                                autofocus="autofocus" maxlength="20"/>
+                </div>
+                <div class="form-group"><i class="fa fa-lock fa-lg"></i> <input class="form-control required"
+                                                                                type="password" placeholder="Password"
+                                                                                id="password" name="password"
+                                                                                maxlength="8"/></div>
+                <div class="form-group"><label class="checkbox"> <input type="checkbox" name="remember" value="1"/>记住我
+                </label></div>
+                <div class="form-group col-md-offset-9">
+                    <button id="bttest" type="button" class="btn btn-success pull-right" data-loading-text="Loading..."
+                            name="submit">登录
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="modal fade" id="queryInfo" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">详细信息</h4>
+                </div>
+                <form method="post">
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <span class="input-group-addon">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span>
+                            <input type="text" class="form-control" placeholder="请输入名称"
+                                   id="name1" readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">规格及型号</span> <input
+                                type="text" class="form-control" placeholder="请输入规格及型号"
+                                id="xinghao1" readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">存&nbsp;放&nbsp;地&nbsp;点</span>
+                            <input type="text" class="form-control"
+                                   placeholder="请输入存放地点名称" id="address1"
+                                   readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">使&nbsp;用&nbsp;部&nbsp;门</span>
+                            <input type="text" class="form-control"
+                                   placeholder="请输入使用部门名称" id="department1"
+                                   readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位</span>
+                            <input type="text" class="form-control" placeholder="请输入单位名称"
+                                   id="unit1" readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量</span>
+                            <input type="text" class="form-control" placeholder="请输入数量"
+                                   id="number1" readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价</span>
+                            <input type="text" class="form-control" placeholder="请输入单价"
+                                   id="price1" readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">金&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;额</span>
+                            <input type="text" class="form-control" placeholder="请输入金额"
+                                   id="totalprice1" readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">来&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;源</span>
+                            <input type="text" class="form-control" placeholder="请输入来源"
+                                   id="come1" readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">购&nbsp;建&nbsp;日&nbsp;期</span>
+                            <input type="text" class="form-control" placeholder="请输入购建日期"
+                                   id="buytime1" readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">使&nbsp;&nbsp;&nbsp;用&nbsp;&nbsp;&nbsp;人</span>
+                            <input type="text" class="form-control" placeholder="请输入使用人名称"
+                                   id="useperson1" readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">经&nbsp;&nbsp;&nbsp;办&nbsp;&nbsp;&nbsp;人</span>
+                            <input type="text" class="form-control" placeholder="请输入经办人名称"
+                                   id="handleperson1" readonly="readonly">
+                        </div>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon">管&nbsp;&nbsp;&nbsp;理&nbsp;&nbsp;&nbsp;员</span>
+                            <input type="text" class="form-control" placeholder="请输入管理员名称"
+                                   id="admini1" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">关闭
+                        </button>
+                        <!-- <button type="submit" class="btn btn-primary">提交</button> -->
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#bttest").click(function () {
+            var data={usrNmae: $("#username").val(),usrCode:$("#password").val()};
+
+            $.ajax({
+                url: "http://localhost:8082/bootsp/save",
+                async: true,
+                type: "POST",
+                datatype: "josn",
+                data: {data:JSON.stringify(data)},
+                // 成功后开启模态框
+                success: showQuery,
+                error: function () {
+                    alert("请求失败");
+                }
+            });
+        });
+
+        function showQuery(data) {
+            $("#name1").val(data.usrCode);
+            $("#xinghao1").val(data.usrNmae);
+            $("#address1").val(data.id);
+
+            // 显示模态框
+            $('#queryInfo').modal('show');
+        }
+    });
+
+</script>
+
+</body>
+</html>

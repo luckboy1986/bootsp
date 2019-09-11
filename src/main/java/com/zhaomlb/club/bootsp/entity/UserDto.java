@@ -3,11 +3,14 @@ package com.zhaomlb.club.bootsp.entity;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "user")
 @Component
-public class UserDto {
+public class UserDto implements Serializable{
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

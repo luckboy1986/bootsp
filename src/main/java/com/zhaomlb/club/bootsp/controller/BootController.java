@@ -1,28 +1,26 @@
 package com.zhaomlb.club.bootsp.controller;
 
+import com.google.gson.Gson;
 import com.zhaomlb.club.bootsp.config.Myconfig;
 import com.zhaomlb.club.bootsp.entity.UserDto;
 import com.zhaomlb.club.bootsp.service.RedisService;
 import com.zhaomlb.club.bootsp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
 
 @Controller
 @RequestMapping("/bootsp")
-@ResponseBody
 public class BootController {
     @Autowired
     private UserService userService;
     @Autowired
     private RedisService redisService;
-
+    @Autowired
+    private Gson gson;
 
     @RequestMapping("/test")
     public List<UserDto> test() {
@@ -30,20 +28,17 @@ public class BootController {
     }
 
     @RequestMapping("/save")
-    public UserDto save() {
-        UserDto userDto = new UserDto();
-        userDto.setUsrCode(String.valueOf(System.currentTimeMillis()));
-        userDto.setUsrNmae(String.valueOf(System.currentTimeMillis()));
+    @ResponseBody
+    public UserDto save(@RequestParam String data) {
+        UserDto userDto=  gson.fromJson(data,UserDto.class);
         return userService.insert(userDto);
     }
 
     @RequestMapping("redis/save")
-    public UserDto redissave() {
-        UserDto userDto = new UserDto();
-        userDto.setUsrCode(String.valueOf(System.currentTimeMillis()));
-        userDto.setUsrNmae(String.valueOf(System.currentTimeMillis()));
+    @ResponseBody
+    public UserDto redissave(@RequestParam String usrNmae, @RequestParam String usrCode) {
         redisService.saveStr(String.valueOf(System.currentTimeMillis()), "1111");
-        return userDto;
+        return null;
     }
 
     @RequestMapping("redis/incre")
@@ -111,6 +106,6 @@ public class BootController {
 
     @RequestMapping("config/getconfig")
     public String getconfig() {
-      return  myconfig.toString();
+        return myconfig.toString();
     }
 }

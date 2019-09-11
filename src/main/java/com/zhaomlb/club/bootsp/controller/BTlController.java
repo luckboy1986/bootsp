@@ -25,7 +25,15 @@ public class BTlController {
     }
 
     @GetMapping("/index")
-    public String indx() {
-        return "add";
+    public ModelAndView indx() {
+        ModelAndView modelAndView = new ModelAndView();
+        System.out.println("add request");
+        UserDto userDto = new UserDto();
+        userDto.setUsrNmae("zhaomlb");
+        userDto.setUsrCode("psd");
+
+        modelAndView.addObject("userDto", userDto);
+        modelAndView.setViewName("btlindex");
+        return modelAndView;
     }
 }

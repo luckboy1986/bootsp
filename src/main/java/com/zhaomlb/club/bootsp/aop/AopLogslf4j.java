@@ -1,11 +1,12 @@
 package com.zhaomlb.club.bootsp.aop;
 
-import com.fasterxml.jackson.core.JsonEncoding;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.google.gson.Gson;
 import com.zhaomlb.club.bootsp.entity.LogDto;
 import com.zhaomlb.club.bootsp.service.LogService;
-import javassist.*;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -26,8 +27,8 @@ public class AopLogslf4j {
 
     @Autowired
     private LogService logService;
-    @Autowired
-    private ObjectMapper mapper;
+
+    private static final Gson gson=new Gson();
 
     @Pointcut("execution(* com.zhaomlb.club.bootsp.controller..*(..))")
     public void alllog() {
@@ -93,7 +94,7 @@ public class AopLogslf4j {
         logDto.setAopType("AfterReturning");
         logDto.setClsName(joinPoint.getTarget().getClass().getName());
         logDto.setMethod(joinPoint.getSignature().getName());
-        logDto.setResPonse(mapper.writeValueAsString(result));
+        logDto.setResPonse(gson.toJson(result));
 
         logService.insert(logDto);
 
